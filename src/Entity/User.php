@@ -1,58 +1,74 @@
 <?php
 
-
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ */
 class User
 {
     /**
-     * @var int
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @var string;
+     * @ORM\Column(type="string", length=20)
      */
     private $login;
 
     /**
-     * @var string;
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
-
-
-    public function __construct(int $id, string $login, string $password)
-    {
-        $this->id = $id;
-        $this->login = $login;
-        $this->password = $password;
-    }
-
     /**
-     * @return int
+     * @ORM\Column(type="string", length=20)
      */
-    public function getId(): int
+    private $name;
+
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
-    public function getLogin(): string
+    public function getLogin(): ?string
     {
         return $this->login;
     }
 
-    /**
-     * @return string
-     */
-    public function getPassword(): string
+    public function setLogin(string $login): self
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
 
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
 }
