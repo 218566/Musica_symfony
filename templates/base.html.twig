@@ -4,9 +4,24 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+
+        <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/magnific-popup.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/themify-icons.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/nice-select.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/audioplayer.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/flaticon.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/gijgo.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/slick.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/slicknav.css') }}" media="all" />
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" media="all" />
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block content %}{% endblock %}
     </body>
 </html>
+    
