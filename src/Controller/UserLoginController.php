@@ -41,20 +41,29 @@ class UserLoginController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user_repository = $this->getDoctrine()->getRepository(User::class);
             $hashed_password = md5($form->getData()['password']);
+            /** @var User $user */
             $user = $user_repository->findOneBy([
                 'login' => $form->getData()['login'],
                 'password' => $hashed_password,
                 ]);
+            if(empty($user)) {
+                return $this->render('form/user-login-form.html.twig', [
+                    'login_form' => $form->createView(),
+                    'errors' => 'Nieprawidłowy login lub hasło'
+                ]);
+            }
+
 
             $session = new Session();
+            $session->clear();
             $session->start();
-
-
+            $session->set('user_id', $user->getId());
 
         }
 
         return $this->render('form/user-login-form.html.twig', [
             'login_form' => $form->createView(),
+            'errors' => ''
         ]);
 
     }
