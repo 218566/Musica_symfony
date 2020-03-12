@@ -38,8 +38,8 @@ class User
      * Many User have Many Grade.
      * @ManyToMany(targetEntity="Grade")
      * @JoinTable(name="users_grades",
-     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="grade_id", referencedColumnName="id", unique=true)}
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@JoinColumn(name="grade_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}
      *      )
      */
     private $album_grades;
