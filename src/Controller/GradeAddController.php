@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 class GradeAddController extends AbstractController
@@ -43,11 +44,21 @@ class GradeAddController extends AbstractController
             ->add('save', SubmitType::class, ['label' => 'Add grade'])
             ->getForm();
 
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $session = new Session();
+            $user_id = $session->get('user_id');
+
+            $user_repository = $this->getDoctrine()->getRepository(User::class);
+            /** @var User $user */
+            $user = $user_repository->find($user_id);
             /** @var Grade $grade */
             $grade = $form->getData();
-            $this->entityManager->persist($grade);
+            $users_grade = $user->getAlbumGrades();
+            $users_grade[] = $grade;
+            $user->setAlbumGrades($users_grade);
+            $this->entityManager->persist($user);
             $this->entityManager->flush();
 
 
