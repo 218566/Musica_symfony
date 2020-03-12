@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToMany;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -30,6 +33,16 @@ class User
      * @ORM\Column(type="string", length=20)
      */
     private $name;
+
+    /**
+     * Many User have Many Grade.
+     * @ManyToMany(targetEntity="Grade")
+     * @JoinTable(name="users_grades",
+     *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="grade_id", referencedColumnName="id", unique=true)}
+     *      )
+     */
+    private $album_grades;
 
     public function getId(): ?int
     {
@@ -70,5 +83,15 @@ class User
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getAlbumGrades()
+    {
+        return $this->album_grades;
+    }
+
+    public function setAlbumGrades($album_grades): void
+    {
+        $this->album_grades = $album_grades;
     }
 }
