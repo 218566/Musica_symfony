@@ -44,6 +44,7 @@ class MyGradesController extends AbstractController
                 'title' => $album_grades->getAlbumTitle(),
                 'artist' => $album_grades->getArtistName(),
                 'grade' => $album_grades->getValue(),
+                'picture_name' => $album_grades->getPictureName(),
             ];
         }
 

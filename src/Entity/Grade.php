@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GradeRepository")
@@ -30,6 +31,16 @@ class Grade
      * @ORM\Column(type="integer")
      */
     private $value;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $picture_name;
+
+    /**
+     * @var File
+     */
+    private $picture;
 
     public function getId(): ?int
     {
@@ -83,4 +94,25 @@ class Grade
 
         return $this;
     }
+
+    public function getPictureName()
+    {
+        return $this->picture_name;
+    }
+
+    public function setPictureName($picture_name): void
+    {
+        $this->picture_name = $picture_name;
+    }
+
+    public function getPicture(): ?File
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(File $picture): void
+    {
+        $this->picture = $picture;
+    }
+
 }

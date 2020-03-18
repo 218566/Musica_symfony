@@ -2,10 +2,13 @@
 
 {% block content %}
 
+
     {% for album in albums %}
+        {% set source = 'assets/images/'~album.picture_name %}
         <div>{{ album.artist }}</div>
         <div>{{ album.title }}</div>
         <div>{{ album.grade }}</div>
+        <img src="{{ source }}">
 
     {% endfor %}
 

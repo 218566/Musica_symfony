@@ -9,9 +9,11 @@ use App\Entity\Grade;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -41,6 +43,7 @@ class GradeAddController extends AbstractController
             ->add('artist_name', TextType::class)
             ->add('album_title', TextType::class)
             ->add('value', IntegerType::class)
+            ->add('picture', FileType::class)
             ->add('save', SubmitType::class, ['label' => 'Add grade'])
             ->getForm();
 
@@ -55,12 +58,18 @@ class GradeAddController extends AbstractController
             $user = $user_repository->find($user_id);
             /** @var Grade $grade */
             $grade = $form->getData();
+
+            /** @var UploadedFile $picture */
+            $picture = $grade->getPicture();
+
+            $picture->move('assets/images');
+            $grade->setPictureName($picture->getClientOriginalName());
+
             $users_grade = $user->getAlbumGrades();
             $users_grade[] = $grade;
             $user->setAlbumGrades($users_grade);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
-
 
         }
 
