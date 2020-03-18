@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    {% for album in albums %}
+        <div>{{ album.artist }}</div>
+        <div>{{ album.title }}</div>
+        <div>{{ album.grade }}</div>
+
+    {% endfor %}
+
+{% endblock %}

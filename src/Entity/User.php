@@ -36,7 +36,7 @@ class User
 
     /**
      * Many User have Many Grade.
-     * @ManyToMany(targetEntity="Grade", cascade={"persist"})
+     * @ManyToMany(targetEntity="Grade", cascade={"persist"}, fetch="EAGER")
      * @JoinTable(name="users_grades",
      *      joinColumns={@JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@JoinColumn(name="grade_id", referencedColumnName="id", onDelete="CASCADE", unique=true)}

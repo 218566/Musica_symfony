@@ -29,6 +29,7 @@ class UserCreateController extends AbstractController
     /**
      * @Route("/create/user", name="user_create")
      */
+
     public function createAction(Request $request)
     {
 
@@ -50,8 +51,6 @@ class UserCreateController extends AbstractController
             $user->setPassword($hashed_password);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
-
-
         }
 
 
