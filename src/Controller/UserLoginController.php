@@ -46,10 +46,12 @@ class UserLoginController extends AbstractController
                 'login' => $form->getData()['login'],
                 'password' => $hashed_password,
                 ]);
+
             if(empty($user)) {
                 return $this->render('form/user-login-form.html.twig', [
                     'login_form' => $form->createView(),
-                    'errors' => 'Nieprawidłowy login lub hasło'
+                    'errors' => 'Nieprawidłowy login lub hasło',
+                    'create_user' => 'create/user',
                 ]);
             }
 
@@ -59,11 +61,13 @@ class UserLoginController extends AbstractController
             $session->start();
             $session->set('user_id', $user->getId());
 
+
         }
 
         return $this->render('form/user-login-form.html.twig', [
             'login_form' => $form->createView(),
-            'errors' => ''
+            'errors' => '',
+            'create_user' => '',
         ]);
 
     }

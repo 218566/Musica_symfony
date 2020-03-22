@@ -42,7 +42,7 @@ class GradeAddController extends AbstractController
         $form = $this->createFormBuilder($grade)
             ->add('artist_name', TextType::class)
             ->add('album_title', TextType::class)
-            ->add('value', IntegerType::class)
+            ->add('value', IntegerType::class, array('attr' => array('min'=>1,'max'=>3)))
             ->add('picture', FileType::class)
             ->add('save', SubmitType::class, ['label' => 'Add grade'])
             ->getForm();

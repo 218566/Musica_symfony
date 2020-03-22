@@ -51,6 +51,7 @@ class UserCreateController extends AbstractController
             $user->setPassword($hashed_password);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
+            return $this->redirectToRoute('user_login');
         }
 
 
