@@ -61,9 +61,10 @@ class GradeAddController extends AbstractController
 
             /** @var UploadedFile $picture */
             $picture = $grade->getPicture();
+            $original_name = $picture->getClientOriginalName();
+            $grade->setPictureName($original_name);
+            $picture->move('assets/images', $original_name);
 
-            $picture->move('assets/images');
-            $grade->setPictureName($picture->getClientOriginalName());
 
             $users_grade = $user->getAlbumGrades();
             $users_grade[] = $grade;
